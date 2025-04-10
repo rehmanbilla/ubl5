@@ -66,7 +66,7 @@ function App() {
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800 w-screen max-w-[100vw] overflow-x-hidden px-4 sm:px-6 lg:px-8 box-border font-inter">
           {/* Disclaimer Banner */}
           {showDisclaimer && (
-          <div className="bg-white border-l-4 border-[#8B1F3F] p-4 h-0 sticky top-0 z-50">
+          <div className="bg-white border-l-4 border-[#8B1F3F] p-4 h-6 sticky top-0 z-50">
             <div className="flex justify-between items-center">
               <div className="flex items-center">
                 <FaShieldAlt className="text-white mr-2" />
@@ -176,17 +176,32 @@ function App() {
                   <p className="text-lg text-gray-600 mb-8">
                     Experience seamless banking on the go with СВQ Mobile - your complete banking solution in your pocket.
                   </p>
-                  <motion.button 
-                    className="bg-white hover:bg-gray-100 text-[#8B1F3F] font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white hover:border-[#C5A05C] relative overflow-hidden group"
-                    onClick={handleDownload}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241]"></span>
-                    <FaDownload className="mr-2 text-[#8B1F3F] text-xl" /> 
-                    <span className="text-lg">{downloadStarted ? 'Downloading...' : 'Download App'}</span>
-                    {!downloadStarted && <span className="absolute -right-1 -top-1 bg-[#C5A05C] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
-                  </motion.button>
+                  <motion.button
+  className="relative bg-green-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-green-500 hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 overflow-hidden group"
+  onClick={handleDownload}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  disabled={downloadStarted} // Disable during download for clarity
+>
+  {/* Gradient overlay on hover */}
+  <span className="absolute inset-0 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-lg"></span>
+
+  {/* Icon */}
+  <FaDownload className="mr-2 text-white text-xl transition-colors duration-300 group-hover:text-[#C5A05C]" />
+
+  {/* Text */}
+  <span className="text-lg transition-colors duration-300 group-hover:text-[#C5A05C]">
+    {downloadStarted ? "Downloading..." : "Download App"}
+  </span>
+
+  {/* "Free" badge */}
+  {!downloadStarted && (
+    <span className="absolute -right-1 -top-1 bg-[#C5A05C] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-semibold animate-pulse">
+      Free
+    </span>
+  )}
+</motion.button>
+
                   {downloadStarted && (
                     <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
                       <div 
@@ -377,7 +392,7 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241]"></span>
+                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241] border-2 border-[#C5A05C] rounded-lg"></span>
                 <FaDownload className="mr-3 text-white text-xl" /> 
                 <span className="text-lg text-blue-900">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
                 {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#8B1F3F] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
