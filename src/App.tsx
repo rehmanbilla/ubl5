@@ -66,11 +66,11 @@ function App() {
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800 w-screen max-w-[100vw] overflow-x-hidden px-4 sm:px-6 lg:px-8 box-border font-inter">
           {/* Disclaimer Banner */}
           {showDisclaimer && (
-          <div className="bg-white border-l-4 border-[#8B1F3F] p-4 h-6 sticky top-0 z-50">
-            <div className="flex justify-between items-center">
+          <div className="bg-white border-l-4 border-[#8B1F3F] p-4 h-6 fixed top-0 left-0 right-0 z-50">
+            <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
               <div className="flex items-center">
                 <FaShieldAlt className="text-white mr-2" />
-                <p className="text-sm text-white">
+                <p className="text-sm text-transparent">
                   This is the official download page for СВQ Mobile Banking App. Always ensure you're downloading from trusted sources.
                 </p>
               </div>
@@ -85,7 +85,7 @@ function App() {
           )}
           
           {/* Header */}
-          <header className="bg-white shadow-md sticky top-0 z-40">
+          <header className="bg-white shadow-md fixed top-[48px] left-0 right-0 z-40">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
               <div className="flex items-center">
                 <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
@@ -166,7 +166,7 @@ function App() {
           </header>
           
           {/* Hero Section */}
-          <section className="py-10 md:py-16">
+          <section className="py-10 md:py-16 mt-20">
             <div className="container mx-auto">
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
@@ -228,7 +228,7 @@ function App() {
           </section>
           
           {/* Features Section */}
-          <section id="features" className="py-10 bg-gray-50">
+          <section id="features" className="py-4">
             <div className="container mx-auto">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Powerful Features</h2>
@@ -237,15 +237,15 @@ function App() {
                 </p>
               </div>
               
-              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
+              <div className="flex overflow-x-auto pb-8 space-x-4 snap-x scrollbar-hide">
                 <motion.div 
-                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <FaMobileAlt className="text-2xl text-[#8B1F3F]" />
                     </div>
@@ -257,13 +257,13 @@ function App() {
                 </motion.div>
                 
                 <motion.div 
-                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <FaExchangeAlt className="text-2xl text-[#8B1F3F]" />
                     </div>
@@ -275,13 +275,13 @@ function App() {
                 </motion.div>
                 
                 <motion.div 
-                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <FaCreditCard className="text-2xl text-[#8B1F3F]" />
                     </div>
@@ -293,13 +293,13 @@ function App() {
                 </motion.div>
                 
                 <motion.div 
-                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <FaBell className="text-2xl text-[#8B1F3F]" />
                     </div>
@@ -311,13 +311,13 @@ function App() {
                 </motion.div>
                 
                 <motion.div 
-                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  className="flex-shrink-0 w-56 snap-center bg-white rounded-xl shadow-md overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
                       <FaQrcode className="text-2xl text-[#8B1F3F]" />
                     </div>
@@ -332,7 +332,7 @@ function App() {
           </section>
           
           {/* Screenshots Section */}
-          <section id="screenshots" className="py-10">
+          <section id="screenshots" className="py-8">
             <div className="container mx-auto">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">App Screenshots</h2>
@@ -379,7 +379,7 @@ function App() {
           </section>
           
           {/* Download Section */}
-          <section id="download" className="py-10 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] relative">
+          <section id="download" className="py-8 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] relative">
             <div className="absolute inset-0 bg-black bg-opacity-30"></div>
             <div className="container mx-auto text-center relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">Download СВQ Mobile Today</h2>
@@ -409,7 +409,7 @@ function App() {
           </section>
           
           {/* FAQ Section */}
-          <section id="faq" className="py-10">
+          <section id="faq" className="py-8">
             <div className="container mx-auto">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Frequently Asked Questions</h2>
