@@ -1,578 +1,558 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload, FaShieldAlt, FaLock, FaSync, FaUserFriends, FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaDownload, FaShieldAlt, FaLock, FaEnvelope, FaPhone, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaBars, FaTimes, FaChevronDown, FaCreditCard, FaExchangeAlt, FaMobileAlt, FaBell, FaQrcode } from 'react-icons/fa';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [downloadStarted, setDownloadStarted] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [downloadStarted, setDownloadStarted] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqs(prev => 
+      prev.includes(index) 
+        ? prev.filter(item => item !== index) 
+        : [...prev, index]
+    );
+  };
 
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2500);
-    
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (downloadStarted) {
+      const interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          const newProgress = prevProgress + 10;
+          if (newProgress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => setDownloadStarted(false), 500);
+            return 100;
+          }
+          return newProgress;
+        });
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, [downloadStarted]);
+
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = "/НВⅬ Mobile.apk";
-    link.download = "НВⅬ-Mobile.apk";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
     setDownloadStarted(true);
+    setProgress(0);
     setTimeout(() => {
-      setDownloadStarted(false);
+      window.location.href = "/CBQ-Mobile.apk";
     }, 3000);
   };
-
-  const s1 = "/images/screenshot1.webp";
-  const s2 = "/images/screenshot2.webp";
-  const s3 = "/images/screenshot3.webp";
-  const s4 = "/images/screenshot4.webp";
-  const s5 = "/images/screenshot5.webp";
 
   return (
     <>
       {loading ? (
         <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
           <div className="w-24 h-24 mb-4">
-            <img src="/nvll-logo.png" alt="НВⅬ Logo" className="w-full h-full object-contain" />
+            <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-bold text-green-700 mb-8">НВⅬ Mobile</h1>
-          <div className="w-16 h-16 border-t-4 border-green-700 border-solid rounded-full animate-spin"></div>
+          <h1 className="text-2xl font-bold text-[#6A0F25] mb-8">СВQ Mobile</h1>
+          <div className="w-16 h-16 border-t-4 border-[#6A0F25] border-solid rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading experience...</p>
         </div>
       ) : (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans text-gray-800 w-screen max-w-[100vw] overflow-x-hidden px-4 sm:px-6 lg:px-8 box-border">
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800 w-screen max-w-[100vw] overflow-x-hidden px-4 sm:px-6 lg:px-8 box-border font-inter">
           {/* Disclaimer Banner */}
           {showDisclaimer && (
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 sticky top-0 z-50">
-          <div className="flex justify-between items-center">
-            <div className="flex">
-              <div className="flex-shrink-0 text-blue-500">
-                <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-blue-50">
-                  This is an unofficial distribution page for the НВⅬ Mobile app. This app is intended for educational and demonstration purposes only.
-                </p>
-
-                  
-              </div>
-            </div>
-            <button 
-              onClick={() => setShowDisclaimer(false)}
-              className="text-blue-500 hover:text-blue-700"
-              aria-label="Close disclaimer"
-            >
-              <FaTimes />
-            </button>
-          </div>
-        </div>
-          )}
-          
-          <header className="bg-white shadow-md sticky top-0 z-40">
-            <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="bg-blue-50 border-l-4 border-[#6A0F25] p-4 sticky top-0 z-50">
+            <div className="flex justify-between items-center">
               <div className="flex items-center">
-                <img src="/nvll-logo.png" alt="НВⅬ Logo" className="w-10 h-10 object-contain" />
-                <span className="text-xl font-semibold ml-2 text-green-700">НВⅬ Mobile</span>
+                <FaShieldAlt className="text-[#6A0F25] mr-2" />
+                <p className="text-sm text-gray-700">
+                  This is the official download page for СВQ Mobile Banking App. Always ensure you're downloading from trusted sources.
+                </p>
               </div>
               <button 
-                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 lg:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? <FaTimes className="text-green-700 text-xl" /> : <FaBars className="text-green-700 text-xl" />}
-              </button>
-              
-              {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center space-x-6">
-                <a href="#features" className="text-gray-700 hover:text-green-700 transition-colors duration-200">Features</a>
-                <a href="#screenshots" className="text-gray-700 hover:text-green-700 transition-colors duration-200">Screenshots</a>
-                <a href="#download" className="text-gray-700 hover:text-green-700 transition-colors duration-200">Download</a>
-                <button 
-                  className="bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 flex items-center"
-                  onClick={() => setIsContactOpen(true)}
-                >
-                  Contact
-                </button>
-              </nav>
-            </div>
-            
-            {/* Mobile Navigation */}
-            {isMenuOpen && (
-              <div className="lg:hidden bg-white border-t border-gray-200 py-2 px-4 shadow-lg">
-                <nav className="flex flex-col space-y-3">
-                  <a 
-                    href="#features" 
-                    className="py-2 px-3 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Features
-                  </a>
-                  <a 
-                    href="#screenshots" 
-                    className="py-2 px-3 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Screenshots
-                  </a>
-                  <a 
-                    href="#download" 
-                    className="py-2 px-3 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-md transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Download
-                  </a>
-                  <button 
-                    className="py-2 px-3 text-left bg-green-700 hover:bg-green-800 text-white font-medium rounded-md transition-colors duration-200"
-                    onClick={() => {
-                      setIsContactOpen(true);
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Contact
-                  </button>
-                </nav>
-              </div>
-            )}
-          </header>
-
-          {/* Hero Section */}
-          <section className="bg-gradient-to-b from-white to-gray-100 py-8 md:py-12">
-            <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-              <div className="text-center md:text-left md:w-1/2 mb-8 md:mb-0">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-green-800">
-                  НВⅬ Mobile Banking
-                </h1>
-                <p className="text-base md:text-lg text-gray-600 mb-6 max-w-lg mx-auto md:mx-0">
-                  Experience seamless banking on the go with НВⅬ Mobile - your complete banking solution in your pocket.
-                </p>
-                <motion.button 
-                  className="bg-green-700 hover:bg-green-800 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg flex items-center justify-center mx-auto md:mx-0 w-full md:w-auto"
-                  onClick={handleDownload}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  disabled={downloadStarted}
-                >
-                  <FaDownload className="mr-2" /> 
-                  {downloadStarted ? 'Downloading...' : 'Download App'}
-                </motion.button>
-                {downloadStarted && (
-                  <motion.p 
-                    className="text-green-600 mt-3 font-medium text-sm md:text-base"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    Download started! Check your downloads folder.
-                  </motion.p>
-                )}
-              </div>
-              <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
-                <motion.img 
-                  src="/main-image.png" 
-                  alt="НВⅬ Mobile App Preview" 
-                  className="w-full md:w-3/4 max-h-[300px] md:max-h-96 object-contain shadow-xl rounded-xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                />
-              </div>
-            </div>
-          </section>
-
-          {/* Features Section */}
-          <section id="features" className="py-8 md:py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-8 md:mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-4">Key Features</h2>
-                <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">Discover the powerful features that make НВⅬ Mobile the perfect banking companion for your daily financial needs.</p>
-              </div>
-              
-              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <div className="text-green-700 text-2xl md:text-3xl p-4 bg-green-50 flex items-center justify-center">
-                      <FaShieldAlt />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Secure Banking</h3>
-                      <p className="text-gray-600">Bank with confidence knowing your data is protected with advanced security measures.</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <div className="text-green-700 text-2xl md:text-3xl p-4 bg-green-50 flex items-center justify-center">
-                      <FaSync />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Real-time Updates</h3>
-                      <p className="text-gray-600">Get instant notifications for all your account activities and transactions.</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <div className="text-green-700 text-2xl md:text-3xl p-4 bg-green-50 flex items-center justify-center">
-                      <FaLock />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Biometric Login</h3>
-                      <p className="text-gray-600">Quick and secure access with fingerprint or face recognition authentication.</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <div className="text-green-700 text-2xl md:text-3xl p-4 bg-green-50 flex items-center justify-center">
-                      <FaUserFriends />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Easy Transfers</h3>
-                      <p className="text-gray-600">Send money to friends and family with just a few taps on your screen.</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Screenshots Section */}
-          <section id="screenshots" className="py-8 md:py-16 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-8 md:mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-4">App Screenshots</h2>
-                <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">Take a look at the sleek and intuitive interface of the НВⅬ Mobile Banking app.</p>
-              </div>
-              
-              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <img src={s1} alt="Login Screen" className="w-full h-96 object-contain rounded-xl" />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Login Screen</h3>
-                      <p className="text-gray-600">Secure and easy login with biometric authentication</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <img src={s2} alt="Dashboard" className="w-full h-96 object-contain rounded-xl" />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Dashboard</h3>
-                      <p className="text-gray-600">Overview of your accounts and transactions</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <img src={s3} alt="Transfer Money" className="w-full h-96 object-contain rounded-xl" />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Transfer Money</h3>
-                      <p className="text-gray-600">Quick and secure money transfers</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <img src={s4} alt="Transactions" className="w-full h-96 object-contain rounded-xl" />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Transactions</h3>
-                      <p className="text-gray-600">View and manage your transaction history</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex-shrink-0 w-64 md:w-72 snap-center"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="rounded-xl shadow-md overflow-hidden">
-                    <img src={s5} alt="Settings" className="w-full h-96 object-contain rounded-xl" />
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold mb-2">Settings</h3>
-                      <p className="text-gray-600">Customize your app preferences</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Download Section */}
-          <section id="download" className="py-8 md:py-16 bg-gradient-to-b from-white to-gray-100">
-            <div className="container mx-auto px-4 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-2">Get НВⅬ Mobile App Now</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-sm md:text-base">
-                Download our app and experience the future of banking right in your hands. It's free, secure, and constantly updated with new features.
-              </p>
-              
-              <div className="bg-white rounded-xl shadow-lg p-6 max-w-3xl mx-auto">
-                <div className="flex flex-col items-center text-center">
-                  <div className="space-y-4 mb-6">
-                    <h3 className="text-2xl font-semibold text-green-700">Direct Download</h3>
-                    <ul className="text-left text-gray-600 text-sm md:text-base">
-                      <li className="flex items-center mb-2">
-                        <FaChevronDown className="text-green-700 mr-2" /> Latest version
-                      </li>
-                      <li className="flex items-center mb-2">
-                        <FaChevronDown className="text-green-700 mr-2" /> Android 5.0+
-                      </li>
-                      <li className="flex items-center">
-                        <FaChevronDown className="text-green-700 mr-2" /> Size: 4.7MB
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <motion.button 
-                    className="bg-green-700 hover:bg-green-800 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg flex items-center justify-center w-full max-w-xs mx-auto"
-                    onClick={handleDownload}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    disabled={downloadStarted}
-                  >
-                    <FaDownload className="mr-2" /> 
-                    {downloadStarted ? 'Downloading...' : 'Download APK'}
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Footer */}
-          <footer className="bg-gray-900 text-white py-12">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                  <div className="flex items-center mb-4">
-                    <img src="/nvll-logo.png" alt="НВⅬ Logo" className="w-10 h-10 object-contain" />
-                    <span className="text-xl font-semibold ml-2 text-green-400">НВⅬ Mobile</span>
-                  </div>
-                  <p className="text-gray-400 mb-4 text-sm md:text-base">
-                    НВⅬ Mobile Banking app provides secure and convenient banking services on your smartphone. 
-                    Access your accounts, transfer funds, pay bills, and manage your finances anytime, anywhere.
-                  </p>
-                  <div className="flex space-x-4">
-                    <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaFacebook className="text-xl" />
-                    </a>
-                    <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaTwitter className="text-xl" />
-                    </a>
-                    <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaInstagram className="text-xl" />
-                    </a>
-                    <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white transition-colors duration-200">
-                      <FaLinkedin className="text-xl" />
-                    </a>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 text-green-400">Quick Links</h3>
-                  <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
-                    <a href="#features" className="text-gray-400 hover:text-white transition-colors duration-200">Features</a>
-                    <a href="#screenshots" className="text-gray-400 hover:text-white transition-colors duration-200">Screenshots</a>
-                    <a href="#download" className="text-gray-400 hover:text-white transition-colors duration-200">Download</a>
-                    <a 
-                      href="#" 
-                      onClick={(e) => {e.preventDefault(); setIsContactOpen(true);}} 
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
-                    >
-                      Contact Us
-                    </a>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 text-green-400">Contact Us</h3>
-                  <div className="space-y-3 text-sm md:text-base">
-                    <div className="flex items-start">
-                      <FaEnvelope className="text-green-400 mt-1 mr-3" />
-                      <span className="font-medium">support@nvll.com</span>
-                    </div>
-                    <div className="flex items-start">
-                      <FaPhone className="text-green-400 mt-1 mr-3" />
-                      <span className="font-medium">+92 21 111 111 425</span>
-                    </div>
-                    <div className="flex items-start">
-                      <FaMapMarkerAlt className="text-green-400 mt-1 mr-3" />
-                      <span className="font-medium">123 Banking Street, Karachi, Pakistan</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-                <p className="text-gray-400 mb-4 md:mb-0 text-sm md:text-base"> {new Date().getFullYear()} НВⅬ Mobile. All rights reserved.</p>
-                <div className="flex space-x-6">
-                  <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</Link>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Use</a>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Contact</a>
-                </div>
-              </div>
-            </div>
-          </footer>
-
-          {/* Contact Popup */}
-          {isContactOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-              <motion.div 
-                className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold text-green-800">Contact НВⅬ Support</h3>
-                  <button 
-                    onClick={() => setIsContactOpen(false)}
-                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                    aria-label="Close"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-                
-                <p className="text-gray-600 mb-6 text-sm md:text-base">
-                  For any queries or assistance with the НВⅬ Mobile Banking App, please reach out to our customer support team:
-                </p>
-                
-                <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                  <div className="flex items-center mb-3">
-                    <FaEnvelope className="text-green-700 mr-3" />
-                    <span className="font-medium">support@nvll.com</span>
-                  </div>
-                  <div className="flex items-center mb-3">
-                    <FaPhone className="text-green-700 mr-3" />
-                    <span className="font-medium">+92 21 111 111 425</span>
-                  </div>
-                  <div className="flex items-center">
-                    <FaMapMarkerAlt className="text-green-700 mr-3" />
-                    <span className="font-medium">24/7 Customer Support</span>
-                  </div>
-                </div>
-                
-                <div className="flex justify-center space-x-4">
-                  <motion.button 
-                    className="bg-green-700 hover:bg-green-800 text-white font-medium py-2.5 px-6 rounded-lg shadow transition-colors duration-200 flex items-center"
-                    onClick={handleDownload}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FaDownload className="mr-2" /> Download App
-                  </motion.button>
-                  <motion.button 
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2.5 px-6 rounded-lg shadow transition-colors duration-200"
-                    onClick={() => setIsContactOpen(false)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Close
-                  </motion.button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </div>
-      )}
-      
-      {/* Contact Modal */}
-      {isContactOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <motion.div 
-            className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold text-green-800">Contact НВⅬ Support</h3>
-              <button 
-                onClick={() => setIsContactOpen(false)}
-                className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                aria-label="Close"
+                onClick={() => setShowDisclaimer(false)}
+                className="text-gray-500 hover:text-gray-700 focus:outline-none"
               >
                 <FaTimes />
               </button>
             </div>
-            
-            <p className="text-gray-600 mb-6 text-sm md:text-base">
-              For any queries or assistance with the НВⅬ Mobile Banking App, please reach out to our customer support team:
-            </p>
-            
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
-              <div className="flex items-center mb-3">
-                <FaEnvelope className="text-green-700 mr-3" />
-                <span className="font-medium">support@nvll.com</span>
-              </div>
-              <div className="flex items-center mb-3">
-                <FaPhone className="text-green-700 mr-3" />
-                <span className="font-medium">+92 21 111 111 425</span>
-              </div>
+          </div>
+          )}
+          
+          {/* Header */}
+          <header className="bg-white shadow-md py-4 sticky top-0 z-50">
+            <div className="container mx-auto px-4 flex justify-between items-center">
               <div className="flex items-center">
-                <FaMapMarkerAlt className="text-green-700 mr-3" />
-                <span className="font-medium">24/7 Customer Support</span>
+                <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
+                <span className="text-xl font-semibold ml-2 text-[#6A0F25] font-inter">СВQ Mobile</span>
               </div>
+              <button 
+                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#6A0F25] lg:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+              <nav className="hidden lg:flex space-x-8">
+                <a href="#features" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Features</a>
+                <a href="#screenshots" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Screenshots</a>
+                <a href="#download" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Download</a>
+                <a href="#faq" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">FAQ</a>
+                <button 
+                  onClick={() => setIsContactOpen(!isContactOpen)}
+                  className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200 flex items-center"
+                >
+                  Contact <FaChevronDown className="ml-1" />
+                </button>
+              </nav>
             </div>
             
-            <div className="flex justify-center space-x-4">
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+              <div className="lg:hidden bg-white shadow-lg rounded-b-lg overflow-hidden">
+                <nav className="flex flex-col p-4 space-y-4">
+                  <a href="#features" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Features</a>
+                  <a href="#screenshots" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Screenshots</a>
+                  <a href="#download" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Download</a>
+                  <a href="#faq" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">FAQ</a>
+                  <button 
+                    onClick={() => setIsContactOpen(!isContactOpen)}
+                    className="text-left text-gray-800 hover:text-[#6A0F25] transition-colors duration-200 flex items-center"
+                  >
+                    Contact <FaChevronDown className="ml-1" />
+                  </button>
+                </nav>
+              </div>
+            )}
+            
+            {/* Contact Dropdown */}
+            {isContactOpen && (
+              <div className="absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 p-4">
+                <div className="flex items-center mb-4">
+                  <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-semibold ml-2 text-[#6A0F25] font-inter">СВQ Mobile</span>
+                </div>
+                <div className="space-y-3">
+                  <a href="mailto:info@cbq.qa" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                    <FaEnvelope className="mr-2" /> info@cbq.qa
+                  </a>
+                  <a href="tel:+97444490000" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                    <FaPhone className="mr-2" /> +974 4449 0000
+                  </a>
+                  <a href="https://maps.google.com" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                    <FaMapMarkerAlt className="mr-2" /> Doha, Qatar
+                  </a>
+                  <div className="flex space-x-4 pt-2">
+                    <a href="https://facebook.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                      <FaFacebook />
+                    </a>
+                    <a href="https://twitter.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                      <FaTwitter />
+                    </a>
+                    <a href="https://instagram.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                      <FaInstagram />
+                    </a>
+                    <a href="https://linkedin.com/company/commercial-bank-of-qatar" className="text-gray-800 hover:text-[#6A0F25]">
+                      <FaLinkedin />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </header>
+          
+          {/* Hero Section */}
+          <section className="py-10 md:py-16">
+            <div className="container mx-auto">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#6A0F25]">
+                    Banking Made Smarter with СВQ Mobile
+                  </h1>
+                  <p className="text-lg text-gray-700 mb-8">
+                    Experience seamless banking on the go with СВQ Mobile - your complete banking solution in your pocket.
+                  </p>
+                  <motion.button 
+                    className="bg-white hover:bg-gray-100 text-[#6A0F25] font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white hover:border-[#B4975A] relative overflow-hidden group"
+                    onClick={handleDownload}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#6A0F25] to-[#B4975A] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                    <FaDownload className="mr-2 text-[#6A0F25] text-xl" /> 
+                    <span className="text-lg">{downloadStarted ? 'Downloading...' : 'Download App'}</span>
+                    {!downloadStarted && <span className="absolute -right-1 -top-1 bg-[#B4975A] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
+                  </motion.button>
+                  {downloadStarted && (
+                    <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
+                      <div 
+                        className="bg-[#6A0F25] h-2.5 rounded-full transition-all duration-300 ease-out"
+                        style={{ width: `${progress}%` }}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+                <motion.div 
+                  className="md:w-1/2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <img 
+                    src="/images/hero-image.jpg" 
+                    alt="CBQ Mobile App Preview" 
+                    className="w-full h-auto rounded-lg shadow-xl"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </section>
+          
+          {/* Features Section */}
+          <section id="features" className="py-10 bg-gray-50">
+            <div className="container mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">Powerful Features</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Discover why millions of customers trust СВQ Mobile for their banking needs
+                </p>
+              </div>
+              
+              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
+                <motion.div 
+                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="p-6">
+                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaMobileAlt className="text-2xl text-[#6A0F25]" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Biometric Login</h3>
+                    <p className="text-gray-600 text-center">
+                      Secure and quick access with fingerprint and face recognition authentication
+                    </p>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <div className="p-6">
+                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaExchangeAlt className="text-2xl text-[#6A0F25]" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Instant Transfers</h3>
+                    <p className="text-gray-600 text-center">
+                      Send money locally and internationally with competitive exchange rates
+                    </p>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="p-6">
+                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaCreditCard className="text-2xl text-[#6A0F25]" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Card Management</h3>
+                    <p className="text-gray-600 text-center">
+                      Control your cards, set limits, freeze/unfreeze, and view transactions
+                    </p>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <div className="p-6">
+                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaBell className="text-2xl text-[#6A0F25]" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Real-time Alerts</h3>
+                    <p className="text-gray-600 text-center">
+                      Stay informed with instant notifications for all account activities
+                    </p>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="flex-shrink-0 w-72 snap-center bg-white rounded-xl shadow-md overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <div className="p-6">
+                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaQrcode className="text-2xl text-[#6A0F25]" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">QR Payments</h3>
+                    <p className="text-gray-600 text-center">
+                      Make contactless payments quickly using QR code technology
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+          
+          {/* Screenshots Section */}
+          <section id="screenshots" className="py-10">
+            <div className="container mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">App Screenshots</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Take a closer look at the sleek interface and powerful features of СВQ Mobile
+                </p>
+              </div>
+              
+              <div className="flex overflow-x-auto pb-8 space-x-6 snap-x scrollbar-hide">
+                <motion.img 
+                  src="/cbq-assets/screenshot1.webp" 
+                  alt="CBQ Mobile Banking Home Screen" 
+                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                />
+                <motion.img 
+                  src="/cbq-assets/screenshot2.webp" 
+                  alt="CBQ Mobile Banking Transactions Screen" 
+                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                />
+                <motion.img 
+                  src="/cbq-assets/screenshot3.webp" 
+                  alt="CBQ Mobile Banking Account Screen" 
+                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                />
+                <motion.img 
+                  src="/cbq-assets/screenshot4.webp" 
+                  alt="CBQ Mobile Banking Settings Screen" 
+                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </div>
+            </div>
+          </section>
+          
+          {/* Download Section */}
+          <section id="download" className="py-10 bg-[#6A0F25] relative">
+            <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+            <div className="container mx-auto text-center relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">Download СВQ Mobile Today</h2>
+              <p className="text-lg mb-6 max-w-3xl mx-auto text-white drop-shadow-md">
+                Join millions of satisfied customers who trust СВQ Mobile for their banking needs. Download now and experience banking at your fingertips.
+              </p>
               <motion.button 
-                className="bg-green-700 hover:bg-green-800 text-white font-medium py-2.5 px-6 rounded-lg shadow transition-colors duration-200 flex items-center"
+                className="bg-gradient-to-r from-[#B4975A] to-[#D9B870] hover:from-[#D9B870] hover:to-[#B4975A] text-white font-bold py-4 px-10 rounded-lg shadow-xl transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white relative overflow-hidden group"
                 onClick={handleDownload}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <FaDownload className="mr-2" /> Download App
+                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                <FaDownload className="mr-3 text-white text-xl" /> 
+                <span className="text-lg">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
+                {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#6A0F25] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
               </motion.button>
-              <motion.button 
-                className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2.5 px-6 rounded-lg shadow transition-colors duration-200"
-                onClick={() => setIsContactOpen(false)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Close
-              </motion.button>
+              {downloadStarted && (
+                <div className="mt-6 w-full max-w-xs mx-auto bg-white bg-opacity-50 rounded-full h-2.5">
+                  <div 
+                    className="bg-white h-2.5 rounded-full transition-all duration-300 ease-out"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+              )}
             </div>
-          </motion.div>
+          </section>
+          
+          {/* FAQ Section */}
+          <section id="faq" className="py-10">
+            <div className="container mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">Frequently Asked Questions</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  Find answers to common questions about СВQ Mobile Banking
+                </p>
+              </div>
+              
+              <div className="max-w-3xl mx-auto space-y-4">
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(0)}
+                  >
+                    <h3 className="text-xl font-semibold text-[#333333]">Is СВQ Mobile Banking secure?</h3>
+                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(0) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(0) && (
+                    <div className="px-6 pb-6 text-gray-600">
+                      <p>
+                        Yes, СВQ Mobile Banking uses state-of-the-art security measures including biometric authentication, encryption, and fraud monitoring systems to keep your information safe.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(1)}
+                  >
+                    <h3 className="text-xl font-semibold text-[#333333]">How do I register for СВQ Mobile Banking?</h3>
+                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(1) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(1) && (
+                    <div className="px-6 pb-6 text-gray-600">
+                      <p>
+                        Download the app, click on "Register," and follow the on-screen instructions. You'll need your CBQ debit card details and registered mobile number to complete the registration.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(2)}
+                  >
+                    <h3 className="text-xl font-semibold text-[#333333]">What features are available on СВQ Mobile?</h3>
+                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(2) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(2) && (
+                    <div className="px-6 pb-6 text-gray-600">
+                      <p>
+                        СВQ Mobile offers account management, fund transfers, bill payments, card controls, QR payments, real-time alerts, and many more features to make banking convenient.
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <button 
+                    className="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+                    onClick={() => toggleFaq(3)}
+                  >
+                    <h3 className="text-xl font-semibold text-[#333333]">Is there a fee for using СВQ Mobile Banking?</h3>
+                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(3) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                      <FaChevronDown />
+                    </span>
+                  </button>
+                  {openFaqs.includes(3) && (
+                    <div className="px-6 pb-6 text-gray-600">
+                      <p>
+                        No, the СВQ Mobile Banking app is free to download and use. Standard data charges from your mobile service provider may apply.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          {/* Footer */}
+          <footer className="bg-[#1A1A1A] text-white py-8">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <div className="flex items-center mb-4">
+                    <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
+                    <span className="text-xl font-semibold ml-2 text-white font-inter">СВQ Mobile</span>
+                  </div>
+                  <p className="text-gray-400 mb-4 text-sm md:text-base">
+                    СВQ Mobile Banking app provides secure and convenient banking services on your smartphone. 
+                    Download now and experience banking at your fingertips.
+                  </p>
+                  <div className="flex space-x-4">
+                    <a href="https://facebook.com/cbqat" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <FaFacebook />
+                    </a>
+                    <a href="https://twitter.com/cbqat" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <FaTwitter />
+                    </a>
+                    <a href="https://instagram.com/cbqat" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <FaInstagram />
+                    </a>
+                    <a href="https://linkedin.com/company/commercial-bank-of-qatar" className="text-gray-400 hover:text-white transition-colors duration-200">
+                      <FaLinkedin />
+                    </a>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-[#B4975A]">Quick Links</h3>
+                  <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
+                    <a href="#features" className="text-gray-400 hover:text-white transition-colors duration-200">Features</a>
+                    <a href="#screenshots" className="text-gray-400 hover:text-white transition-colors duration-200">Screenshots</a>
+                    <a href="#download" className="text-gray-400 hover:text-white transition-colors duration-200">Download</a>
+                    <a href="#faq" className="text-gray-400 hover:text-white transition-colors duration-200">FAQ</a>
+                    <a href="https://www.cbq.qa/en/personal/ways-to-bank/mobile-and-internet-banking" className="text-gray-400 hover:text-white transition-colors duration-200">Learn More</a>
+                    <a href="#" onClick={(e) => {e.preventDefault(); setIsContactOpen(!isContactOpen);}} className="text-gray-400 hover:text-white transition-colors duration-200">Contact</a>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-[#B4975A]">Contact Us</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center">
+                      <FaEnvelope className="text-gray-400 mr-2" /> 
+                      <a href="mailto:info@cbq.qa" className="text-gray-400 hover:text-white transition-colors duration-200">info@cbq.qa</a>
+                    </li>
+                    <li className="flex items-center">
+                      <FaPhone className="text-gray-400 mr-2" /> 
+                      <a href="tel:+97444490000" className="text-gray-400 hover:text-white transition-colors duration-200">+974 4449 0000</a>
+                    </li>
+                    <li className="flex items-center">
+                      <FaMapMarkerAlt className="text-gray-400 mr-2" /> 
+                      <span className="text-gray-400">Commercial Bank Plaza, Doha, Qatar</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="border-t border-gray-800 mt-6 pt-4 text-center text-gray-500 text-sm">
+                <p>&copy; {new Date().getFullYear()} Commercial Bank of Qatar. All rights reserved.</p>
+                <p className="mt-2">
+                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Privacy Policy</a>
+                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Terms of Service</a>
+                  <a href="#" className="text-gray-500 hover:text-gray-400 mx-2">Security</a>
+                </p>
+              </div>
+            </div>
+          </footer>
         </div>
       )}
     </>
