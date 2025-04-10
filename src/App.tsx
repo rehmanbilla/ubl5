@@ -47,7 +47,7 @@ function App() {
     setDownloadStarted(true);
     setProgress(0);
     setTimeout(() => {
-      window.location.href = "/CBQ-Mobile.apk";
+      window.location.href = "/СВQ%20Mobile.apk";
     }, 3000);
   };
 
@@ -58,53 +58,53 @@ function App() {
           <div className="w-24 h-24 mb-4">
             <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-bold text-[#6A0F25] mb-8">СВQ Mobile</h1>
-          <div className="w-16 h-16 border-t-4 border-[#6A0F25] border-solid rounded-full animate-spin"></div>
+          <h1 className="text-2xl font-bold text-[#8B1F3F] mb-8">СВQ Mobile</h1>
+          <div className="w-16 h-16 border-t-4 border-[#8B1F3F] border-solid rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading experience...</p>
         </div>
       ) : (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800 w-screen max-w-[100vw] overflow-x-hidden px-4 sm:px-6 lg:px-8 box-border font-inter">
           {/* Disclaimer Banner */}
           {showDisclaimer && (
-          <div className="bg-blue-50 border-l-4 border-[#6A0F25] p-4 sticky top-0 z-50">
+          <div className="bg-white border-l-4 border-[#8B1F3F] p-4 h-0 sticky top-0 z-50">
             <div className="flex justify-between items-center">
               <div className="flex items-center">
-                <FaShieldAlt className="text-[#6A0F25] mr-2" />
-                <p className="text-sm text-gray-700">
+                <FaShieldAlt className="text-white mr-2" />
+                <p className="text-sm text-white">
                   This is the official download page for СВQ Mobile Banking App. Always ensure you're downloading from trusted sources.
                 </p>
               </div>
               <button 
                 onClick={() => setShowDisclaimer(false)}
-                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                className="text-white hover:text-gray-700 focus:outline-none"
               >
-                <FaTimes />
+                <FaTimes className="text-white" />
               </button>
             </div>
           </div>
           )}
           
           {/* Header */}
-          <header className="bg-white shadow-md py-4 sticky top-0 z-50">
-            <div className="container mx-auto px-4 flex justify-between items-center">
+          <header className="bg-white shadow-md sticky top-0 z-40">
+            <div className="container mx-auto px-4 py-3 flex justify-between items-center">
               <div className="flex items-center">
                 <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
-                <span className="text-xl font-semibold ml-2 text-[#6A0F25] font-inter">СВQ Mobile</span>
+                <span className="text-xl font-semibold ml-2 text-[#8B1F3F] font-inter">СВQ Mobile</span>
               </div>
               <button 
-                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#6A0F25] lg:hidden"
+                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B1F3F] lg:hidden"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? <FaTimes /> : <FaBars />}
               </button>
               <nav className="hidden lg:flex space-x-8">
-                <a href="#features" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Features</a>
-                <a href="#screenshots" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Screenshots</a>
-                <a href="#download" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Download</a>
-                <a href="#faq" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">FAQ</a>
+                <a href="#features" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Features</a>
+                <a href="#screenshots" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Screenshots</a>
+                <a href="#download" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Download</a>
+                <a href="#faq" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">FAQ</a>
                 <button 
                   onClick={() => setIsContactOpen(!isContactOpen)}
-                  className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200 flex items-center"
+                  className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200 flex items-center"
                 >
                   Contact <FaChevronDown className="ml-1" />
                 </button>
@@ -115,13 +115,13 @@ function App() {
             {isMenuOpen && (
               <div className="lg:hidden bg-white shadow-lg rounded-b-lg overflow-hidden">
                 <nav className="flex flex-col p-4 space-y-4">
-                  <a href="#features" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Features</a>
-                  <a href="#screenshots" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Screenshots</a>
-                  <a href="#download" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">Download</a>
-                  <a href="#faq" className="text-gray-800 hover:text-[#6A0F25] transition-colors duration-200">FAQ</a>
+                  <a href="#features" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Features</a>
+                  <a href="#screenshots" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Screenshots</a>
+                  <a href="#download" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">Download</a>
+                  <a href="#faq" className="text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200">FAQ</a>
                   <button 
                     onClick={() => setIsContactOpen(!isContactOpen)}
-                    className="text-left text-gray-800 hover:text-[#6A0F25] transition-colors duration-200 flex items-center"
+                    className="text-left text-gray-700 hover:text-[#8B1F3F] transition-colors duration-200 flex items-center"
                   >
                     Contact <FaChevronDown className="ml-1" />
                   </button>
@@ -134,29 +134,29 @@ function App() {
               <div className="absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-xl z-50 p-4">
                 <div className="flex items-center mb-4">
                   <img src="/images/cbq-icon.jpg" alt="CBQ Logo" className="w-10 h-10 object-contain" />
-                  <span className="text-xl font-semibold ml-2 text-[#6A0F25] font-inter">СВQ Mobile</span>
+                  <span className="text-xl font-semibold ml-2 text-[#8B1F3F] font-inter">СВQ Mobile</span>
                 </div>
                 <div className="space-y-3">
-                  <a href="mailto:info@cbq.qa" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                  <a href="mailto:info@cbq.qa" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
                     <FaEnvelope className="mr-2" /> info@cbq.qa
                   </a>
-                  <a href="tel:+97444490000" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                  <a href="tel:+97444490000" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
                     <FaPhone className="mr-2" /> +974 4449 0000
                   </a>
-                  <a href="https://maps.google.com" className="flex items-center text-gray-800 hover:text-[#6A0F25]">
+                  <a href="https://maps.google.com" className="flex items-center text-gray-700 hover:text-[#8B1F3F]">
                     <FaMapMarkerAlt className="mr-2" /> Doha, Qatar
                   </a>
                   <div className="flex space-x-4 pt-2">
-                    <a href="https://facebook.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                    <a href="https://facebook.com/cbqat" className="text-gray-700 hover:text-[#8B1F3F]">
                       <FaFacebook />
                     </a>
-                    <a href="https://twitter.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                    <a href="https://twitter.com/cbqat" className="text-gray-700 hover:text-[#8B1F3F]">
                       <FaTwitter />
                     </a>
-                    <a href="https://instagram.com/cbqat" className="text-gray-800 hover:text-[#6A0F25]">
+                    <a href="https://instagram.com/cbqat" className="text-gray-700 hover:text-[#8B1F3F]">
                       <FaInstagram />
                     </a>
-                    <a href="https://linkedin.com/company/commercial-bank-of-qatar" className="text-gray-800 hover:text-[#6A0F25]">
+                    <a href="https://linkedin.com/company/commercial-bank-of-qatar" className="text-gray-700 hover:text-[#8B1F3F]">
                       <FaLinkedin />
                     </a>
                   </div>
@@ -170,27 +170,27 @@ function App() {
             <div className="container mx-auto">
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#6A0F25]">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#8B1F3F]">
                     Banking Made Smarter with СВQ Mobile
                   </h1>
-                  <p className="text-lg text-gray-700 mb-8">
+                  <p className="text-lg text-gray-600 mb-8">
                     Experience seamless banking on the go with СВQ Mobile - your complete banking solution in your pocket.
                   </p>
                   <motion.button 
-                    className="bg-white hover:bg-gray-100 text-[#6A0F25] font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white hover:border-[#B4975A] relative overflow-hidden group"
+                    className="bg-white hover:bg-gray-100 text-[#8B1F3F] font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white hover:border-[#C5A05C] relative overflow-hidden group"
                     onClick={handleDownload}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#6A0F25] to-[#B4975A] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                    <FaDownload className="mr-2 text-[#6A0F25] text-xl" /> 
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241]"></span>
+                    <FaDownload className="mr-2 text-[#8B1F3F] text-xl" /> 
                     <span className="text-lg">{downloadStarted ? 'Downloading...' : 'Download App'}</span>
-                    {!downloadStarted && <span className="absolute -right-1 -top-1 bg-[#B4975A] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
+                    {!downloadStarted && <span className="absolute -right-1 -top-1 bg-[#C5A05C] text-white text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
                   </motion.button>
                   {downloadStarted && (
                     <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
                       <div 
-                        className="bg-[#6A0F25] h-2.5 rounded-full transition-all duration-300 ease-out"
+                        className="bg-[#8B1F3F] h-2.5 rounded-full transition-all duration-300 ease-out"
                         style={{ width: `${progress}%` }}
                       ></div>
                     </div>
@@ -216,7 +216,7 @@ function App() {
           <section id="features" className="py-10 bg-gray-50">
             <div className="container mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">Powerful Features</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Powerful Features</h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Discover why millions of customers trust СВQ Mobile for their banking needs
                 </p>
@@ -231,8 +231,8 @@ function App() {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="p-6">
-                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaMobileAlt className="text-2xl text-[#6A0F25]" />
+                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaMobileAlt className="text-2xl text-[#8B1F3F]" />
                     </div>
                     <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Biometric Login</h3>
                     <p className="text-gray-600 text-center">
@@ -249,8 +249,8 @@ function App() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
                   <div className="p-6">
-                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaExchangeAlt className="text-2xl text-[#6A0F25]" />
+                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaExchangeAlt className="text-2xl text-[#8B1F3F]" />
                     </div>
                     <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Instant Transfers</h3>
                     <p className="text-gray-600 text-center">
@@ -267,8 +267,8 @@ function App() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <div className="p-6">
-                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaCreditCard className="text-2xl text-[#6A0F25]" />
+                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaCreditCard className="text-2xl text-[#8B1F3F]" />
                     </div>
                     <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Card Management</h3>
                     <p className="text-gray-600 text-center">
@@ -285,8 +285,8 @@ function App() {
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
                   <div className="p-6">
-                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaBell className="text-2xl text-[#6A0F25]" />
+                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaBell className="text-2xl text-[#8B1F3F]" />
                     </div>
                     <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">Real-time Alerts</h3>
                     <p className="text-gray-600 text-center">
@@ -303,8 +303,8 @@ function App() {
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <div className="p-6">
-                    <div className="w-16 h-16 bg-[#6A0F25] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <FaQrcode className="text-2xl text-[#6A0F25]" />
+                    <div className="w-16 h-16 bg-[#8B1F3F] bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <FaQrcode className="text-2xl text-[#8B1F3F]" />
                     </div>
                     <h3 className="text-xl font-semibold mb-3 text-center text-[#333333]">QR Payments</h3>
                     <p className="text-gray-600 text-center">
@@ -320,7 +320,7 @@ function App() {
           <section id="screenshots" className="py-10">
             <div className="container mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">App Screenshots</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">App Screenshots</h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Take a closer look at the sleek interface and powerful features of СВQ Mobile
                 </p>
@@ -330,7 +330,7 @@ function App() {
                 <motion.img 
                   src="/cbq-assets/screenshot1.webp" 
                   alt="CBQ Mobile Banking Home Screen" 
-                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
@@ -338,7 +338,7 @@ function App() {
                 <motion.img 
                   src="/cbq-assets/screenshot2.webp" 
                   alt="CBQ Mobile Banking Transactions Screen" 
-                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -346,7 +346,7 @@ function App() {
                 <motion.img 
                   src="/cbq-assets/screenshot3.webp" 
                   alt="CBQ Mobile Banking Account Screen" 
-                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
@@ -354,7 +354,7 @@ function App() {
                 <motion.img 
                   src="/cbq-assets/screenshot4.webp" 
                   alt="CBQ Mobile Banking Settings Screen" 
-                  className="w-60 h-auto rounded-lg shadow-lg snap-start"
+                  className="w-56 md:w-72 h-auto rounded-lg shadow-lg snap-start"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
@@ -364,23 +364,23 @@ function App() {
           </section>
           
           {/* Download Section */}
-          <section id="download" className="py-10 bg-[#6A0F25] relative">
-            <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+          <section id="download" className="py-10 bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] relative">
+            <div className="absolute inset-0 bg-black bg-opacity-30"></div>
             <div className="container mx-auto text-center relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">Download СВQ Mobile Today</h2>
               <p className="text-lg mb-6 max-w-3xl mx-auto text-white drop-shadow-md">
                 Join millions of satisfied customers who trust СВQ Mobile for their banking needs. Download now and experience banking at your fingertips.
               </p>
               <motion.button 
-                className="bg-gradient-to-r from-[#B4975A] to-[#D9B870] hover:from-[#D9B870] hover:to-[#B4975A] text-white font-bold py-4 px-10 rounded-lg shadow-xl transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white relative overflow-hidden group"
+                className="bg-gradient-to-r from-[#8B1F3F] to-[#C5A05C] hover:from-[#C5A05C] hover:to-[#8B1F3F] text-white font-bold py-4 px-10 rounded-lg shadow-xl transition-all duration-300 flex items-center justify-center w-full max-w-xs mx-auto border-2 border-white relative overflow-hidden group"
                 onClick={handleDownload}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 text-[#712241]"></span>
                 <FaDownload className="mr-3 text-white text-xl" /> 
-                <span className="text-lg">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
-                {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#6A0F25] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
+                <span className="text-lg text-blue-900">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
+                {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#8B1F3F] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
               </motion.button>
               {downloadStarted && (
                 <div className="mt-6 w-full max-w-xs mx-auto bg-white bg-opacity-50 rounded-full h-2.5">
@@ -397,7 +397,7 @@ function App() {
           <section id="faq" className="py-10">
             <div className="container mx-auto">
               <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#6A0F25]">Frequently Asked Questions</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#8B1F3F]">Frequently Asked Questions</h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Find answers to common questions about СВQ Mobile Banking
                 </p>
@@ -410,7 +410,7 @@ function App() {
                     onClick={() => toggleFaq(0)}
                   >
                     <h3 className="text-xl font-semibold text-[#333333]">Is СВQ Mobile Banking secure?</h3>
-                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(0) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(0) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
@@ -429,7 +429,7 @@ function App() {
                     onClick={() => toggleFaq(1)}
                   >
                     <h3 className="text-xl font-semibold text-[#333333]">How do I register for СВQ Mobile Banking?</h3>
-                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(1) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(1) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
@@ -448,7 +448,7 @@ function App() {
                     onClick={() => toggleFaq(2)}
                   >
                     <h3 className="text-xl font-semibold text-[#333333]">What features are available on СВQ Mobile?</h3>
-                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(2) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(2) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
@@ -467,7 +467,7 @@ function App() {
                     onClick={() => toggleFaq(3)}
                   >
                     <h3 className="text-xl font-semibold text-[#333333]">Is there a fee for using СВQ Mobile Banking?</h3>
-                    <span className="text-[#6A0F25] transition-transform duration-300" style={{ transform: openFaqs.includes(3) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <span className="text-[#8B1F3F] transition-transform duration-300" style={{ transform: openFaqs.includes(3) ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       <FaChevronDown />
                     </span>
                   </button>
@@ -484,7 +484,7 @@ function App() {
           </section>
           
           {/* Footer */}
-          <footer className="bg-[#1A1A1A] text-white py-8">
+          <footer className="bg-gray-900 text-white py-8">
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
@@ -513,7 +513,7 @@ function App() {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-[#B4975A]">Quick Links</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-[#C5A05C]">Quick Links</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
                     <a href="#features" className="text-gray-400 hover:text-white transition-colors duration-200">Features</a>
                     <a href="#screenshots" className="text-gray-400 hover:text-white transition-colors duration-200">Screenshots</a>
@@ -525,7 +525,7 @@ function App() {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-[#B4975A]">Contact Us</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-[#C5A05C]">Contact Us</h3>
                   <ul className="space-y-2">
                     <li className="flex items-center">
                       <FaEnvelope className="text-gray-400 mr-2" /> 
