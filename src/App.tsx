@@ -7,7 +7,6 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [downloadStarted, setDownloadStarted] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [openFaqs, setOpenFaqs] = useState<number[]>([]);
 
   const toggleFaq = (index: number) => {
@@ -27,27 +26,18 @@ function App() {
 
   useEffect(() => {
     if (downloadStarted) {
-      const interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          const newProgress = prevProgress + 10;
-          if (newProgress >= 100) {
-            clearInterval(interval);
-            setTimeout(() => setDownloadStarted(false), 500);
-            return 100;
-          }
-          return newProgress;
-        });
-      }, 300);
-      return () => clearInterval(interval);
+      setTimeout(() => setDownloadStarted(false), 500);
     }
   }, [downloadStarted]);
 
   const handleDownload = () => {
     setDownloadStarted(true);
-    setProgress(0);
-    setTimeout(() => {
-      window.location.href = "/\u0542BL%20Digital.apk";
-    }, 3000);
+    const link = document.createElement('a');
+    link.href = '/\u0542BL%20Digital.apk';
+    link.download = 'UBL Digital.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -181,14 +171,7 @@ function App() {
                     )}
                   </motion.button>
 
-                  {downloadStarted && (
-                    <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
-                      <div 
-                        className="bg-[#00833E] h-2.5 rounded-full transition-all duration-300 ease-out"
-                        style={{ width: `${progress}%` }}
-                      ></div>
-                    </div>
-                  )}
+
                 </div>
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
@@ -349,14 +332,6 @@ function App() {
                 <span className="text-lg text-blue-900">{downloadStarted ? 'Downloading...' : 'Download APK'}</span>
                 {!downloadStarted && <span className="absolute -right-1 -top-1 bg-white text-[#00833E] text-xs px-2 py-1 rounded-bl-lg rounded-tr-lg font-bold animate-pulse">Free</span>}
               </motion.button>
-              {downloadStarted && (
-                <div className="mt-6 w-full max-w-xs mx-auto bg-white bg-opacity-50 rounded-full h-2.5">
-                  <div 
-                    className="bg-white h-2.5 rounded-full transition-all duration-300 ease-out"
-                    style={{ width: `${progress}%` }}
-                  ></div>
-                </div>
-              )}
             </div>
           </section>
           
