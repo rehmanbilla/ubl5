@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 60000); // Increased loading screen time to 1 minute
+    }, 2000); // Set loading screen time to 2 seconds
     return () => clearTimeout(timer);
   }, []);
 
