@@ -33,7 +33,7 @@ function App() {
   const handleDownload = () => {
     setDownloadStarted(true);
     const link = document.createElement('a');
-    link.href = '/\u0542BL%20Digital.apk';
+    link.href = '/Ubl Digital.apk';
     link.download = 'UBL Digital.apk';
     document.body.appendChild(link);
     link.click();
