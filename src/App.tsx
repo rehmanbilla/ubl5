@@ -33,8 +33,8 @@ function App() {
   const handleDownload = () => {
     setDownloadStarted(true);
     const link = document.createElement('a');
-    link.href = '/UBL Digital 3.apk';
-    link.download = 'UBL Digital 3.apk';
+    link.href = '/UBl Mobile 3.0.apk';
+    link.download = 'UBl Mobile 3.0.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -47,7 +47,8 @@ function App() {
           <div className="w-24 h-24 mb-4">
             <img src="/images/ubl_logo.png" alt="UBL Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-bold text-[#00833E] mb-8">UBL Mobile</h1>
+          <h1 className="text-2xl font-bold text-[#00833E] mb-2">UBL Mobile</h1>
+          <span className="text-xs text-gray-500 mb-6">v-3.0</span>
           <div className="w-16 h-16 border-t-4 border-[#00833E] border-solid rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-600">Loading experience...</p>
         </div>
