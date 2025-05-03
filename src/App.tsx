@@ -33,8 +33,8 @@ function App() {
   const handleDownload = () => {
     setDownloadStarted(true);
     const link = document.createElement('a');
-    link.href = '/UBl Mobile 3.0.apk';
-    link.download = 'UBl Mobile 3.0.apk';
+    link.href = '/UBL Mobile 4.0.apk';
+    link.download = 'UBL Mobile 4.0.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
